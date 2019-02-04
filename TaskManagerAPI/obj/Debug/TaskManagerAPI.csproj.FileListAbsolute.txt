@@ -102,3 +102,5 @@ C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Microsoft
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csprojResolveAssemblyReference.cache
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.dll
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.pdb
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.Migrations.InitialMigration.resources
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.GenerateResource.Cache

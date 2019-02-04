@@ -3,29 +3,49 @@ namespace TaskManagerAPI.Persisitance
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using TaskManagerAPI.Core.Domain;
 
     public class TaskManagerDBContext : DbContext
     {
-        // Your context has been configured to use a 'TaskManagerDBContext' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'TaskManagerAPI.Persisitance.TaskManagerDBContext' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'TaskManagerDBContext' 
-        // connection string in the application configuration file.
         public TaskManagerDBContext()
             : base("name=TaskManagerDBContext")
         {
         }
 
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
+        public DbSet<Task> Tasks { get; set; }
 
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Task>()
+                .HasKey(t => t.TaskId)
+                .ToTable("Task");
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.TaskId)
+                .HasColumnName("Task_ID");
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.ParentId)
+                .HasColumnName("Parent_ID")
+                .IsOptional();
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.TaskDetails)
+                .HasColumnName("Task")
+                .IsRequired();
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.StartDate)
+                .HasColumnName("Start_Date");
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.EndDate)
+                .HasColumnName("End_Date");
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
+
 }
