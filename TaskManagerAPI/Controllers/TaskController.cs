@@ -33,7 +33,7 @@ namespace TaskManagerAPI.Controllers
         {
             var tasks = _unitOfWork.Tasks.GetAll();
             if (tasks == null)
-                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "No Tasks Not Found" });
+                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "No Tasks Found" });
             return Ok(tasks.Select(t => Mapper.Map<Task, TaskResource>(t)));
         }
         [HttpPost]
