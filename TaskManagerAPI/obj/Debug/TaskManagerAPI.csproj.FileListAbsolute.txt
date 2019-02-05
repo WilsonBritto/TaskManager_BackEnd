@@ -99,7 +99,6 @@ C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Microsoft
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Microsoft.AI.WindowsServer.xml
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Microsoft.AI.Web.xml
-C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csprojResolveAssemblyReference.cache
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.dll
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.pdb
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.Migrations.InitialMigration.resources
@@ -122,3 +121,11 @@ C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Unity.Int
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Unity.RegistrationByConvention.pdb
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Unity.ServiceLocation.pdb
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\Newtonsoft.Json.pdb
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\AutoMapper.dll
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.ValueTuple.dll
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\AutoMapper.pdb
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\AutoMapper.xml
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.ValueTuple.xml
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csprojAssemblyReference.cache
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CoreCompileInputs.cache
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CopyComplete
