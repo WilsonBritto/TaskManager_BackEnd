@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TaskManagerAPI.App_Start;
 
 namespace TaskManagerAPI
 {
@@ -20,6 +22,7 @@ namespace TaskManagerAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             UnityConfig.RegisterComponents();
+            Mapper.Initialize(m => m.AddProfile<MappingProfile>());
         }
     }
 }
