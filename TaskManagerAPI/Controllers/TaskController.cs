@@ -14,10 +14,12 @@ namespace TaskManagerAPI.Controllers
     public class TaskController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public TaskController(IUnitOfWork unitOfWork)
+        public TaskController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +28,7 @@ namespace TaskManagerAPI.Controllers
             var task = _unitOfWork.Tasks.Get(Id);
             if (task == null)
                 return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "Task with Id = "+Id.ToString()+" not found" });
-            return Ok(Mapper.Map<Task, TaskResource>(task));
+            return Ok(_mapper.Map<Task, TaskResource>(task));
         }
         [HttpGet]
         public IHttpActionResult GetAllTasks()
@@ -34,7 +36,7 @@ namespace TaskManagerAPI.Controllers
             var tasks = _unitOfWork.Tasks.GetAll();
             if (tasks == null)
                 return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "No Tasks Found" });
-            return Ok(tasks.Select(t => Mapper.Map<Task, TaskResource>(t)));
+            return Ok(tasks.Select(t => _mapper.Map<Task, TaskResource>(t)));
         }
         [HttpPost]
         public IHttpActionResult CreateTask([FromBody]TaskResource taskResource)
@@ -42,10 +44,10 @@ namespace TaskManagerAPI.Controllers
             if (taskResource == null)
                 return BadRequest();
 
-            var task = Mapper.Map<TaskResource, Task>(taskResource);
+            var task = _mapper.Map<TaskResource, Task>(taskResource);
             _unitOfWork.Tasks.Add(task);
             _unitOfWork.Complete();
-            taskResource = Mapper.Map<Task, TaskResource>(task);
+            taskResource = _mapper.Map<Task, TaskResource>(task);
 
             var newUri = new Uri(Request.RequestUri +"/"+ taskResource.TaskId.ToString());
 
@@ -70,7 +72,7 @@ namespace TaskManagerAPI.Controllers
 
             _unitOfWork.Complete();
 
-            Mapper.Map(task, taskResource);
+            _mapper.Map(task, taskResource);
 
             return Ok(taskResource);
         }
