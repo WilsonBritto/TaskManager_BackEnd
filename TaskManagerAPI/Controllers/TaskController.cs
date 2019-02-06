@@ -25,7 +25,7 @@ namespace TaskManagerAPI.Controllers
         {
             var task = _unitOfWork.Tasks.Get(Id);
             if (task == null)
-                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "Task with Id = "+Id.ToString()+" not found" });
+                return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "Task with Id = "+Id.ToString()+" not found" });
             return Ok(Mapper.Map<Task, TaskResource>(task));
         }
         [HttpGet]
@@ -33,7 +33,7 @@ namespace TaskManagerAPI.Controllers
         {
             var tasks = _unitOfWork.Tasks.GetAll();
             if (tasks == null)
-                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "No Tasks Found" });
+                return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "No Tasks Found" });
             return Ok(tasks.Select(t => Mapper.Map<Task, TaskResource>(t)));
         }
         [HttpPost]
@@ -56,7 +56,7 @@ namespace TaskManagerAPI.Controllers
         {
             var task = _unitOfWork.Tasks.Get(Id);
             if (task == null)
-                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "Task with Id = " + Id.ToString() + " not found" });
+                return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "Task with Id = " + Id.ToString() + " not found" });
 
             if (taskResource == null || (taskResource.TaskId != null && taskResource.TaskId != Id))
                 return BadRequest();
@@ -79,7 +79,7 @@ namespace TaskManagerAPI.Controllers
         {
             var task = _unitOfWork.Tasks.Get(Id);
             if (task == null)
-                return Content(HttpStatusCode.NotFound, new { errorCode = HttpStatusCode.NotFound, error = "Task with Id = " + Id.ToString() + " not found" });
+                return Content(HttpStatusCode.NotFound, new ErrorResource { errorCode = HttpStatusCode.NotFound, error = "Task with Id = " + Id.ToString() + " not found" });
 
             _unitOfWork.Tasks.Remove(task);
             _unitOfWork.Complete();
