@@ -271,6 +271,7 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\ITaskRepository.cs" />
+    <Compile Include="Core\Resources\ErrorResource.cs" />
     <Compile Include="Core\Resources\TaskResource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
