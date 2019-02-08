@@ -60,5 +60,34 @@ namespace TaskManagerAPI.Tests.Controllers
             Assert.That(result, Is.TypeOf<OkNegotiatedContentResult<TaskResource>>());
             Assert.That(resultObj.Content.TaskId, Is.EqualTo(5));
         }
+
+        [Test]
+        public void GetAllTasks_WhenNoTasksFound_ReturnsContent()
+        {
+            _unitOfWork.Setup(s => s.Tasks.GetAll()).Returns((List<Task>)null);
+
+            var result = _controller.GetAllTasks();
+            var resultObj = result as NegotiatedContentResult<ErrorResource>;
+
+            Assert.That(result, Is.TypeOf<NegotiatedContentResult<ErrorResource>>());
+            Assert.That(resultObj.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        }
+        [Test]
+        public void GetAllTasks_WhenTaskFound_ReturnsOk()
+        {
+            var TaskList = new List<Task>
+            {
+                new Task {TaskId = 1},
+                new Task {TaskId = 2},
+                new Task {TaskId = 3}
+            };
+            _unitOfWork.Setup(s => s.Tasks.GetAll()).Returns(TaskList);
+
+            var result = _controller.GetAllTasks();
+            var resultObj = result as OkNegotiatedContentResult<IEnumerable<TaskResource>>;
+
+            Assert.That(result, Is.TypeOf<OkNegotiatedContentResult<IEnumerable<TaskResource>>>());
+            Assert.That(resultObj.Content.Count, Is.EqualTo(3));
+        }
     }
 }
