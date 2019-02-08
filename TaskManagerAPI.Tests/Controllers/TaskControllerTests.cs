@@ -166,5 +166,27 @@ namespace TaskManagerAPI.Tests.Controllers
             Assert.That(resultObj.Content.TaskDetails, Does.Contain("Updated"));
             Assert.That(task.TaskDetails, Does.Contain("Updated"));
         }
+        [Test]
+        public void DeleteTask_WhenCalledWithIdNotPresentInDb_ReturnsNotFound()
+        {
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns(null as Task);
+
+            var result = _controller.DeleteTask(1);
+            var resultObj = result as NegotiatedContentResult<ErrorResource>;
+
+            Assert.That(result, Is.TypeOf<NegotiatedContentResult<ErrorResource>>());
+            Assert.That(resultObj.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        }
+        [Test]
+        public void DeleteTask_WhenCalledWithIdPresentInDb_ReturnsOk()
+        {
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns(new Task());
+
+            var result = _controller.DeleteTask(1);
+
+            _unitOfWork.Verify(u => u.Tasks.Remove(It.IsAny<Task>()));
+            _unitOfWork.Verify(u => u.Complete());
+            Assert.That(result, Is.TypeOf<OkResult>());
+        }
     }
 }
