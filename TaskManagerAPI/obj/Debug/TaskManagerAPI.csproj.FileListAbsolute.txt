@@ -128,3 +128,4 @@ C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\AutoMappe
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.ValueTuple.xml
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CoreCompileInputs.cache
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CopyComplete
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csprojAssemblyReference.cache

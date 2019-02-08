@@ -12,6 +12,7 @@ using TaskManagerAPI.Core.Resources;
 using System.Net;
 using AutoMapper;
 using TaskManagerAPI.App_Start;
+using System.Net.Http;
 
 namespace TaskManagerAPI.Tests.Controllers
 {
@@ -88,6 +89,38 @@ namespace TaskManagerAPI.Tests.Controllers
 
             Assert.That(result, Is.TypeOf<OkNegotiatedContentResult<IEnumerable<TaskResource>>>());
             Assert.That(resultObj.Content.Count, Is.EqualTo(3));
+        }
+        [Test]
+        public void CreateTask_WhenNullObjectSent_ReturnsBadRequest()
+        {
+            var result = _controller.CreateTask((TaskResource)null);
+
+            Assert.That(result, Is.TypeOf<BadRequestResult>());
+        }
+        [Test]
+        public void CreateTask_WhenObjectWithoutIdSent_ReturnsOkWithCreatedObjectAndUri()
+        {
+            var taskResource = new TaskResource { TaskDetails = "Test Task" };
+            var task = _mapper.Map<TaskResource, Task>(taskResource);
+            _unitOfWork.Setup(s => s.Tasks.Add(It.IsAny<Task>()))
+                .Callback((Task t) =>
+                {
+                    t.TaskId = 5;
+                    task = t;
+                });
+            _controller.Request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("https://Test")
+            };
+
+            var result = _controller.CreateTask(taskResource);
+            var resultObj = result as CreatedNegotiatedContentResult<TaskResource>;
+            
+
+            Assert.That(result, Is.TypeOf<CreatedNegotiatedContentResult<TaskResource>>());
+            Assert.That(resultObj.Location.ToString(), Does.Contain(task.TaskId.ToString()));
+            Assert.That(resultObj.Content.TaskId, Is.EqualTo(task.TaskId));
+            Assert.That(resultObj.Content.TaskDetails, Is.EqualTo(task.TaskDetails));
         }
     }
 }
