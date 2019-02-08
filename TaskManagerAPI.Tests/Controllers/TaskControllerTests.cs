@@ -116,7 +116,7 @@ namespace TaskManagerAPI.Tests.Controllers
             var result = _controller.CreateTask(taskResource);
             var resultObj = result as CreatedNegotiatedContentResult<TaskResource>;
 
-
+            _unitOfWork.Verify(u => u.Complete());
             Assert.That(result, Is.TypeOf<CreatedNegotiatedContentResult<TaskResource>>());
             Assert.That(resultObj.Location.ToString(), Does.Contain(task.TaskId.ToString()));
             Assert.That(resultObj.Content.TaskId, Is.EqualTo(task.TaskId));
@@ -161,6 +161,7 @@ namespace TaskManagerAPI.Tests.Controllers
             var result = _controller.UpdateTask(1, taskResource);
             var resultObj = result as OkNegotiatedContentResult<TaskResource>;
 
+            _unitOfWork.Verify(u => u.Complete());
             Assert.That(result, Is.TypeOf<OkNegotiatedContentResult<TaskResource>>());
             Assert.That(resultObj.Content.TaskDetails, Does.Contain("Updated"));
             Assert.That(task.TaskDetails, Does.Contain("Updated"));
