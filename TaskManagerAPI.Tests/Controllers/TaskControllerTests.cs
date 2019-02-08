@@ -91,14 +91,14 @@ namespace TaskManagerAPI.Tests.Controllers
             Assert.That(resultObj.Content.Count, Is.EqualTo(3));
         }
         [Test]
-        public void CreateTask_WhenNullObjectSent_ReturnsBadRequest()
+        public void CreateTask_WhenCalledWithNullTaskObject_ReturnsBadRequest()
         {
             var result = _controller.CreateTask((TaskResource)null);
 
             Assert.That(result, Is.TypeOf<BadRequestResult>());
         }
         [Test]
-        public void CreateTask_WhenObjectWithoutIdSent_ReturnsOkWithCreatedObjectAndUri()
+        public void CreateTask_WhenCalledWithTaskWithoutId_ReturnsOkWithCreatedObjectAndUri()
         {
             var taskResource = new TaskResource { TaskDetails = "Test Task" };
             var task = _mapper.Map<TaskResource, Task>(taskResource);
@@ -115,12 +115,55 @@ namespace TaskManagerAPI.Tests.Controllers
 
             var result = _controller.CreateTask(taskResource);
             var resultObj = result as CreatedNegotiatedContentResult<TaskResource>;
-            
+
 
             Assert.That(result, Is.TypeOf<CreatedNegotiatedContentResult<TaskResource>>());
             Assert.That(resultObj.Location.ToString(), Does.Contain(task.TaskId.ToString()));
             Assert.That(resultObj.Content.TaskId, Is.EqualTo(task.TaskId));
             Assert.That(resultObj.Content.TaskDetails, Is.EqualTo(task.TaskDetails));
+        }
+        [Test]
+        public void UpdateTask_WhenIdNotPresentInDb_ReturnsNotFound()
+        {
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns((Task)null);
+
+            var result = _controller.UpdateTask(1,new TaskResource());
+            var resultObj = result as NegotiatedContentResult<ErrorResource>;
+
+            Assert.That(result, Is.TypeOf<NegotiatedContentResult<ErrorResource>>());
+            Assert.That(resultObj.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        }
+        [Test]
+        public void UpdateTask_WhenCalledWithNullTaskObject_ReturnsBadRequest()
+        {
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns(new Task());
+
+            var result = _controller.UpdateTask(1, null as TaskResource);
+
+            Assert.That(result, Is.TypeOf<BadRequestResult>());
+        }
+        [Test]
+        public void UpdateTask_WhenCalledWithIdNotMatchingWithTaskId_ReturnsBadRequest()
+        {
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns(new Task());
+
+            var result = _controller.UpdateTask(1, new TaskResource { TaskId = 2 });
+
+            Assert.That(result, Is.TypeOf<BadRequestResult>());
+        }
+        [Test]
+        public void UpdateTask_WhenCalledWithIdPresentInDbAndMatchingWithTaskId_ReturnsOk()
+        {
+            var task = new Task { TaskId = 1, TaskDetails = "Test Task" };
+            _unitOfWork.Setup(s => s.Tasks.Get(1)).Returns(task);
+            var taskResource = new TaskResource { TaskId = 1, TaskDetails = "Updated test task" };
+
+            var result = _controller.UpdateTask(1, taskResource);
+            var resultObj = result as OkNegotiatedContentResult<TaskResource>;
+
+            Assert.That(result, Is.TypeOf<OkNegotiatedContentResult<TaskResource>>());
+            Assert.That(resultObj.Content.TaskDetails, Does.Contain("Updated"));
+            Assert.That(task.TaskDetails, Does.Contain("Updated"));
         }
     }
 }
