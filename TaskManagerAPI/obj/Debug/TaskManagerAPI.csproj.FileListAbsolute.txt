@@ -129,3 +129,6 @@ C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.Va
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CoreCompileInputs.cache
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CopyComplete
 C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.csprojAssemblyReference.cache
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.Web.Cors.dll
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.Web.Http.Cors.dll
+C:\Assignments\Capsule\Middleware\V1\TaskManagerAPI\TaskManagerAPI\bin\System.Web.Http.Cors.xml
